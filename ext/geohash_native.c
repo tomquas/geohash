@@ -28,6 +28,13 @@
 #include "ruby.h"
 #include <ctype.h>
 
+#ifndef RUBY_19
+#ifndef RFLOAT_VALUE
+#define RFLOAT_VALUE(v) (RFLOAT(v)->value)
+#endif
+#endif
+
+
 static VALUE rb_cGeoHash;
 
 #define BASE32	"0123456789bcdefghjkmnpqrstuvwxyz"
@@ -120,7 +127,7 @@ static VALUE encode(VALUE self, VALUE lat, VALUE lon, VALUE precision)
 	if (digits <3 || digits > 12)
 		digits = 12;
 	
-	encode_geohash(RFLOAT(lat)->value, RFLOAT(lon)->value, digits, str);
+	encode_geohash(RFLOAT_VALUE(lat), RFLOAT_VALUE(lon), digits, str);
 
 	geohash = rb_str_new2(str);
 	return geohash;
