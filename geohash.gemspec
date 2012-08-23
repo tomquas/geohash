@@ -2,7 +2,7 @@ jruby = !!()
 
 Gem::Specification.new do |s|
   s.name     = "geohash"
-  s.version  = '1.1.1'
+  s.version  = '1.1.2'
   s.date     = "2010-09-14"
   s.summary  = "GeoHash Library for Ruby, per http://geohash.org implementation."
   s.email    = "dave@popvox.com"
