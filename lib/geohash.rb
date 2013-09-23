@@ -1,7 +1,9 @@
 begin
   require 'geohash_native'
 rescue LoadError => e
-  require File.expand_path('../geohash_java', __FILE__)
+  if ENV['JRUBY'] || RUBY_PLATFORM =~ /java/
+    require File.expand_path('../geohash_java', __FILE__)
+  end
 end
 
 class Float
