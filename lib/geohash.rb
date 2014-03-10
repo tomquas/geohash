@@ -74,7 +74,16 @@ class GeoHash
     return intr
   end
 
-  def self.encode_uint64(latitude, longitude)
+  def self.encode_uint64(*args)
+    if args.size < 2
+      latlon = self.decode(args[0])
+      latitude, longitude = latlon[0], latlon[1]
+    elsif args.size < 3
+      latitude, longitude = args[0], args[1]
+    else
+      raise ArgumentError
+    end
+
     if latitude >= 90.0 or latitude < -90.0
       raise ValueError("Latitude must be in the range of (-90.0, 90.0)")
     end

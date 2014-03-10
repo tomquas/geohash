@@ -4,7 +4,8 @@ require "#{File.dirname(__FILE__)}/../lib/geohash"
 require 'test/unit'
 
 class GeoHashTest < Test::Unit::TestCase
-  def test_one
+
+  def test_lat_lon
     dataset = [
       [0x0000000000000000, -90.0, -180.0],
       [0x0800000000000000, -90.0, -135.0],
@@ -43,8 +44,19 @@ class GeoHashTest < Test::Unit::TestCase
     dataset.each do |data|
       assert_equal data[0], GeoHash.encode_uint64(data[1], data[2])
       latlon = GeoHash.decode_uint64(data[0])
-      assert_equal latlon[0], data[1]
-      assert_equal latlon[1], data[2]
+      assert_equal data[1], latlon[0]
+      assert_equal data[2], latlon[1]
     end
+  end
+
+  def test_geohash
+    data = [0xC800000000000000, 0.0, 45.0]
+    geohash = GeoHash.encode(data[1], data[2])
+
+    # converting geohash to lat/lon introduces rounding errors, so result
+    # is not exactly data[0]
+    expected_after_rounding = 14027211639383294080
+    assert_equal expected_after_rounding, GeoHash.encode_uint64(geohash)
+    assert_equal expected_after_rounding, GeoHash.encode_uint64(data[1], data[2] - 1e-5)
   end
 end
