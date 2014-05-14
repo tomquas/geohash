@@ -16,7 +16,6 @@ class Float
 end
 
 class GeoHash
-  include GEOHASH::VERSION
   NEIGHBOR_DIRECTIONS = [ [0, 1], [2, 3] ]
 
   # Encode latitude and longitude to a geohash with precision digits
