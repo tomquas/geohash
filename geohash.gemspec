@@ -1,9 +1,14 @@
+# -*- encoding: utf-8 -*-
+$:.push File.expand_path('../lib', __FILE__)
+
+require 'geohash/version'
+
 jruby = !!()
 
 Gem::Specification.new do |s|
   s.name     = "geohash"
-  s.version  = '1.3.1'
-  s.date     = "2014-03-10"
+  s.version  = GEOHASH::VERSION
+  s.date     = "2014-05-14"
   s.summary  = "GeoHash Library for Ruby, original work by Dave Troy and Hiroaki Kawai"
   s.email    = "tom@patugo.com"
   s.homepage = "http://github.com/tomquas/geohash"

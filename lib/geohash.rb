@@ -6,6 +6,8 @@ rescue LoadError => e
   end
 end
 
+require 'geohash/version'
+
 class Float
   def decimals(places)
     n = (self * (10 ** places)).round
@@ -14,7 +16,7 @@ class Float
 end
 
 class GeoHash
-  VERSION = '1.2.0'
+  include GEOHASH::VERSION
   NEIGHBOR_DIRECTIONS = [ [0, 1], [2, 3] ]
 
   # Encode latitude and longitude to a geohash with precision digits
